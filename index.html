@@ -522,6 +522,181 @@
       .gallery-grid { gap: 0; }
       .polaroid { margin: 0 -12px; }
     }
+
+    /* ============================================
+       MUSIC PLAYER — FLOATING BUTTON
+    ============================================ */
+    .music-player {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    /* Song info tooltip — slides in when playing */
+    .music-info {
+      background: var(--white);
+      border: 1px solid rgba(200, 169, 110, 0.25);
+      border-radius: 40px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      opacity: 0;
+      transform: translateX(16px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      max-width: 220px;
+    }
+
+    .music-info.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Animated equaliser bars (shown when playing) */
+    .eq-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+    }
+
+    .eq-bars span {
+      display: block;
+      width: 3px;
+      background: var(--rose-gold);
+      border-radius: 2px;
+      animation: eqBounce 0.8s ease-in-out infinite alternate;
+    }
+    .eq-bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+    .eq-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; }
+    .eq-bars span:nth-child(3) { height: 8px;  animation-delay: 0.3s; }
+    .eq-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+    .eq-bars span:nth-child(5) { height: 5px;  animation-delay: 0.25s; }
+
+    @keyframes eqBounce {
+      from { transform: scaleY(0.35); }
+      to   { transform: scaleY(1); }
+    }
+
+    .eq-bars.paused span { animation-play-state: paused; }
+
+    .music-song-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--slate-light);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* The circular toggle button */
+    .music-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(200, 169, 110, 0.4);
+      background: var(--white);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 10px 30px rgba(201,149,108,0.25);
+      background: var(--cream-dark);
+    }
+
+    /* Ripple pulse when playing */
+    .music-btn.playing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid var(--rose-gold);
+      animation: musicPulse 1.8s ease-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes musicPulse {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+
+    /* Volume slider — appears on hover of the whole player */
+    .volume-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 40px;
+      padding: 7px 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      opacity: 0;
+      transform: translateX(16px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .music-player:hover .volume-row,
+    .music-player:focus-within .volume-row {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .volume-row .vol-icon { font-size: 0.85rem; }
+
+    .volume-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 80px;
+      height: 3px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--rose-gold) var(--vol, 70%), #e0d6cc var(--vol, 70%));
+      outline: none;
+      cursor: pointer;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--rose-gold);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--rose-gold);
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      .music-player { bottom: 18px; right: 16px; }
+      .music-btn { width: 46px; height: 46px; font-size: 1.15rem; }
+      .music-info { max-width: 160px; font-size: 0.76rem; }
+    }
   </style>
 </head>
 <body>
@@ -771,10 +946,121 @@ Happy Birthday, my love. Thank you for becoming one of my favourite memories whi
         // Restore button
         easterBtn.innerHTML = '<span class="stethoscope">🤍</span> Listen to my heart';
 
-        easterActive = false;
-      }, 4500);
-    });
+    /* ============================================================
+       4. BACKGROUND MUSIC PLAYER
+    ============================================================ */
+    (function initMusicPlayer() {
+      const audio       = document.getElementById('bg-music');
+      const btn         = document.getElementById('music-btn');
+      const infoPanel   = document.getElementById('music-info');
+      const eqBars      = document.getElementById('eq-bars');
+      const volSlider   = document.getElementById('volume-slider');
+
+      let isPlaying = false;
+
+      /* Set initial volume */
+      audio.volume = parseFloat(volSlider.value);
+
+      /* ------- Toggle play / pause ------- */
+      btn.addEventListener('click', function () {
+        if (isPlaying) {
+          audio.pause();
+          setUIState(false);
+        } else {
+          audio.play().then(() => {
+            setUIState(true);
+          }).catch(() => {
+            /* Autoplay blocked — shouldn't happen on click, but just in case */
+            btn.title = 'Click to play music';
+          });
+        }
+      });
+
+      /* ------- Volume slider ------- */
+      volSlider.addEventListener('input', function () {
+        const val = parseFloat(this.value);
+        audio.volume = val;
+        /* Update the CSS gradient fill on the track */
+        this.style.setProperty('--vol', `${Math.round(val * 100)}%`);
+      });
+
+      /* ------- Sync if audio ends (shouldn't with loop, but safety net) ------- */
+      audio.addEventListener('ended', () => setUIState(false));
+      audio.addEventListener('pause', () => { if (!audio.ended) setUIState(false); });
+      audio.addEventListener('play',  () => setUIState(true));
+
+      /* ------- Update all UI elements ------- */
+      function setUIState(playing) {
+        isPlaying = playing;
+
+        if (playing) {
+          btn.textContent   = '⏸';
+          btn.setAttribute('aria-label', 'Pause music');
+          btn.classList.add('playing');
+          infoPanel.classList.add('visible');
+          eqBars.classList.remove('paused');
+        } else {
+          btn.textContent   = '▶';
+          btn.setAttribute('aria-label', 'Play music');
+          btn.classList.remove('playing');
+          infoPanel.classList.remove('visible');
+          eqBars.classList.add('paused');
+        }
+      }
+
+      /* ------- Try to extract filename as song name ------- */
+      const src = audio.querySelector('source')?.src || '';
+      if (src) {
+        const raw = src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        const formatted = raw.charAt(0).toUpperCase() + raw.slice(1);
+        document.getElementById('song-name').textContent = '♪ ' + formatted;
+      }
+    })();
   </script>
+
+  <!-- ============================================
+       BACKGROUND MUSIC
+       Place your song file named "music.mp3" in the same folder.
+       Supported formats: .mp3  |  .ogg  |  .wav
+  ============================================ -->
+  <audio id="bg-music" loop preload="metadata">
+    <source src="music.mp3" type="audio/mpeg" />
+    <!-- Fallback formats (optional) -->
+    <!-- <source src="music.ogg" type="audio/ogg" /> -->
+  </audio>
+
+  <!-- FLOATING MUSIC PLAYER UI -->
+  <div class="music-player" role="region" aria-label="Music player">
+
+    <!-- Song name + EQ bars -->
+    <div class="music-info" id="music-info" aria-live="polite">
+      <div class="eq-bars paused" id="eq-bars">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <span class="music-song-name" id="song-name">♪ playing for you</span>
+    </div>
+
+    <!-- Volume row (visible on hover) -->
+    <div class="volume-row" aria-label="Volume control">
+      <span class="vol-icon">🔈</span>
+      <input
+        class="volume-slider"
+        id="volume-slider"
+        type="range"
+        min="0" max="1" step="0.02"
+        value="0.7"
+        aria-label="Volume"
+        style="--vol: 70%;"
+      />
+      <span class="vol-icon">🔊</span>
+    </div>
+
+    <!-- Play / Pause button -->
+    <button class="music-btn" id="music-btn" aria-label="Play background music" title="Play music">
+      ▶
+    </button>
+
+  </div>
 
 </body>
 </html>
