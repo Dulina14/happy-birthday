@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Chathumi!</title>
+<style>
+    /* ESSENTIAL STYLING (CSS) */
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #fcf8f0; /* Soft Cream Background */
+        font-family: 'Georgia', serif;
+        overflow: hidden; /* Keeps the animation within the screen */
+    }
+
+    .card-container {
+        width: 90%;
+        max-width: 800px;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        text-align: center;
+        position: relative;
+    }
+
+    h1.main-title {
+        color: #5d4037; /* Dark Brown */
+        font-size: 3em;
+        margin-bottom: 10px;
+        font-family: 'Brush Script MT', cursive; /* Elegant Script */
+    }
+
+    /* THE TYPING MESSAGE EFFECT */
+    #birthday-message {
+        font-size: 1.3em;
+        line-height: 1.6;
+        color: #333;
+        margin-top: 30px;
+        min-height: 150px; /* Prevents layout jump */
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 10px;
+        background-color: #333;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    /* PHOTO CONTAINER */
+    .photo-frame {
+        width: 250px;
+        height: 250px;
+        margin: 20px auto;
+        border: 10px solid white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Important: keeps photo from stretching */
+    }
+
+    /* ANIMATED FLOWER BOUQUETS */
+    .flower {
+        position: absolute;
+        bottom: -100px; /* Start off-screen */
+        font-size: 40px; /* Size of the flowers/emojis */
+        opacity: 0;
+        animation: floatUp 6s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Variation in starting positions and animation delays */
+    .f1 { left: 5%; animation-delay: 0s; }
+    .f2 { left: 15%; animation-delay: 2s; }
+    .f3 { left: 25%; animation-delay: 4s; }
+    .f4 { left: 70%; animation-delay: 1s; }
+    .f5 { left: 80%; animation-delay: 3s; }
+    .f6 { left: 90%; animation-delay: 5s; }
+
+</style>
+</head>
+<body>
+
+    <!-- DIGITAL BOUQUETS (Animated Emojis for Simplicity & Safety) -->
+    <div class="flower f1">🌸</div>
+    <div class="flower f2">🌹</div>
+    <div class="flower f3">🌻</div>
+    <div class="flower f4">💐</div>
+    <div class="flower f5">🌷</div>
+    <div class="flower f6">🌺</div>
+
+    <div class="card-container">
+        <h1 class="main-title">Happy Birthday, Chathumi!</h1>
+
+        <!-- THE PHOTO (Place your file here) -->
+        <div class="photo-frame">
+            <!-- INSTRUCTIONS: Change "your_photo.jpg" to your actual image filename -->
+            <img src="D:\Samsung A71\Pictures\Whatsapp\IMG-20250416-WA0015.jpg" alt="A beautiful moment of us">
+        </div>
+
+        <!-- TYPING EFFECT MESSAGE CONTAINER -->
+        <div id="birthday-message"></div>
+    </div>
+
+    <script>
+        // THE INTERACTIVE SCRIPT (JS)
+
+        const textToType = "Dearest Chathumi,\n\nOn this special day, I wanted to create something unique just for you. Every moment we spend together is a gift, and I am so grateful for the laughter, the adventures, and the love we share. \n\nYou make the world a brighter place. Here's to celebrating you today and every day. \n\nWishing you the happiest of birthdays, filled with joy and everything your heart desires.\n\nWith all my love,\n\nDulina";
+
+        const messageElement = document.getElementById('birthday-message');
+        let index = 0;
+
+        function typeWriter() {
+            if (index < textToType.length) {
+                // If it's a newline, add a break tag, otherwise add the character
+                if (textToType.charAt(index) === '\n') {
+                    messageElement.innerHTML += '<br>';
+                } else {
+                    messageElement.innerHTML += textToType.charAt(index);
+                }
+                index++;
+                setTimeout(typeWriter, 50); // Controls the typing speed (milliseconds)
+            } else {
+                // Add the blinking cursor when typing finishes
+                messageElement.innerHTML += '<span class="cursor">&nbsp;</span>';
+            }
+        }
+
+        // Start the typing animation when the page loads
+        window.onload = typeWriter;
+
+    </script>
+</body>
+</html>
