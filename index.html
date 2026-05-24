@@ -40,7 +40,7 @@
     }
 
     /* ============================================
-       FLOATING BACKGROUND ELEMENTS
+       FLOATING BACKGROUND EMOJIS
     ============================================ */
     .floaters {
       position: fixed;
@@ -52,7 +52,6 @@
 
     .floater {
       position: absolute;
-      font-size: 1.4rem;
       opacity: 0;
       animation: floatUp linear infinite;
       user-select: none;
@@ -66,7 +65,7 @@
     }
 
     /* ============================================
-       DECORATIVE BORDER / GRAIN OVERLAY
+       GRAIN OVERLAY
     ============================================ */
     .grain-overlay {
       position: fixed;
@@ -99,8 +98,8 @@
       opacity: 0;
       animation: fadeSlideDown 1s ease forwards 0.2s;
     }
-    .top-rule span { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .top-rule .crown { font-size: 1.1rem; }
+    .top-rule span      { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .top-rule .crown    { font-size: 1.1rem; }
 
     /* ============================================
        HERO SECTION
@@ -174,9 +173,10 @@
       animation: fadeIn 1s ease forwards 0.8s;
     }
     .divider::before,
-    .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--rose-light)); }
-    .divider::after { background: linear-gradient(90deg, var(--rose-light), transparent); }
-    .divider .icon { font-size: 1rem; }
+    .divider::after  { content: ''; flex: 1; height: 1px; }
+    .divider::before { background: linear-gradient(90deg, transparent, var(--rose-light)); }
+    .divider::after  { background: linear-gradient(90deg, var(--rose-light), transparent); }
+    .divider .icon   { font-size: 1rem; }
 
     /* ============================================
        PHOTO GALLERY — POLAROID STYLE
@@ -201,7 +201,6 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      gap: 0;
       flex-wrap: wrap;
     }
 
@@ -216,14 +215,8 @@
       position: relative;
     }
 
-    .polaroid:first-child {
-      transform: rotate(-4deg) translateY(10px);
-      z-index: 1;
-    }
-    .polaroid:last-child {
-      transform: rotate(3.5deg) translateY(8px);
-      z-index: 2;
-    }
+    .polaroid:first-child  { transform: rotate(-4deg) translateY(10px); z-index: 1; margin: 0 -12px; }
+    .polaroid:last-child   { transform: rotate(3.5deg) translateY(8px); z-index: 2; margin: 0 -12px; }
 
     .polaroid:hover {
       transform: rotate(0deg) translateY(-12px) scale(1.04) !important;
@@ -245,8 +238,7 @@
     .polaroid .caption {
       position: absolute;
       bottom: 12px;
-      left: 0;
-      right: 0;
+      left: 0; right: 0;
       text-align: center;
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -272,7 +264,7 @@
       box-shadow: 0 4px 30px rgba(0,0,0,0.05);
     }
 
-    /* Decorative corner marks */
+    /* Decorative corner brackets */
     .letter-card::before,
     .letter-card::after {
       content: '';
@@ -283,7 +275,7 @@
       border-style: solid;
       opacity: 0.5;
     }
-    .letter-card::before { top: 14px; left: 14px; border-width: 1px 0 0 1px; }
+    .letter-card::before { top: 14px;    left: 14px;  border-width: 1px 0 0 1px; }
     .letter-card::after  { bottom: 14px; right: 14px; border-width: 0 1px 1px 0; }
 
     .letter-header {
@@ -329,7 +321,7 @@
     }
 
     /* ============================================
-       MEDICAL EASTER EGG SECTION
+       EASTER EGG SECTION
     ============================================ */
     .easter-section {
       display: flex;
@@ -358,7 +350,6 @@
       line-height: 1;
     }
 
-    /* Heartbeat animation (triggered by JS) */
     .heart-icon.beating {
       animation: heartbeat 0.7s ease infinite;
     }
@@ -396,10 +387,8 @@
       box-shadow: 0 8px 24px rgba(201,149,108,0.3);
     }
 
-    .easter-btn .stethoscope { font-size: 1rem; }
-
     /* ============================================
-       WISHES SECTION
+       WISHES GRID
     ============================================ */
     .wishes-section {
       opacity: 0;
@@ -426,7 +415,8 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.09);
     }
 
-    .wish-card .w-icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .wish-card .w-icon  { font-size: 1.6rem; margin-bottom: 12px; }
+
     .wish-card .w-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem;
@@ -434,6 +424,7 @@
       color: var(--slate);
       margin-bottom: 8px;
     }
+
     .wish-card .w-text {
       font-size: 0.85rem;
       line-height: 1.7;
@@ -472,7 +463,7 @@
     }
 
     /* ============================================
-       KEYFRAME ANIMATIONS
+       SHARED KEYFRAMES
     ============================================ */
     @keyframes fadeSlideDown {
       from { opacity: 0; transform: translateY(-24px); }
@@ -489,7 +480,6 @@
       to   { opacity: 1; }
     }
 
-    /* Romantic heading swap animation */
     @keyframes headingPop {
       0%   { transform: scale(0.88); opacity: 0; }
       60%  { transform: scale(1.04); opacity: 1; }
@@ -501,30 +491,7 @@
     }
 
     /* ============================================
-       RESPONSIVE
-    ============================================ */
-    @media (max-width: 600px) {
-      .gallery-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: 28px;
-      }
-      .polaroid:first-child,
-      .polaroid:last-child {
-        transform: rotate(0deg) translateY(0);
-      }
-      .polaroid:hover {
-        transform: translateY(-8px) scale(1.03) !important;
-      }
-    }
-
-    @media (min-width: 601px) {
-      .gallery-grid { gap: 0; }
-      .polaroid { margin: 0 -12px; }
-    }
-
-    /* ============================================
-       MUSIC PLAYER — FLOATING BUTTON
+       MUSIC PLAYER — FLOATING
     ============================================ */
     .music-player {
       position: fixed;
@@ -537,7 +504,6 @@
       gap: 10px;
     }
 
-    /* Song info tooltip — slides in when playing */
     .music-info {
       background: var(--white);
       border: 1px solid rgba(200, 169, 110, 0.25);
@@ -560,7 +526,7 @@
       transform: translateX(0);
     }
 
-    /* Animated equaliser bars (shown when playing) */
+    /* Animated EQ bars */
     .eq-bars {
       display: flex;
       align-items: flex-end;
@@ -575,10 +541,10 @@
       border-radius: 2px;
       animation: eqBounce 0.8s ease-in-out infinite alternate;
     }
-    .eq-bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+    .eq-bars span:nth-child(1) { height: 6px;  animation-delay: 0.00s; }
     .eq-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; }
-    .eq-bars span:nth-child(3) { height: 8px;  animation-delay: 0.3s; }
-    .eq-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+    .eq-bars span:nth-child(3) { height: 8px;  animation-delay: 0.30s; }
+    .eq-bars span:nth-child(4) { height: 14px; animation-delay: 0.10s; }
     .eq-bars span:nth-child(5) { height: 5px;  animation-delay: 0.25s; }
 
     @keyframes eqBounce {
@@ -597,7 +563,6 @@
       text-overflow: ellipsis;
     }
 
-    /* The circular toggle button */
     .music-btn {
       width: 52px;
       height: 52px;
@@ -621,7 +586,7 @@
       background: var(--cream-dark);
     }
 
-    /* Ripple pulse when playing */
+    /* Ripple pulse ring when playing */
     .music-btn.playing::before {
       content: '';
       position: absolute;
@@ -637,7 +602,7 @@
       100% { transform: scale(1.7); opacity: 0; }
     }
 
-    /* Volume slider — appears on hover of the whole player */
+    /* Volume slider — appears on hover */
     .volume-row {
       display: flex;
       align-items: center;
@@ -692,29 +657,70 @@
       cursor: pointer;
     }
 
-    @media (max-width: 480px) {
-      .music-player { bottom: 18px; right: 16px; }
-      .music-btn { width: 46px; height: 46px; font-size: 1.15rem; }
-      .music-info { max-width: 160px; font-size: 0.76rem; }
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 600px) {
+      .gallery-grid { flex-direction: column; align-items: center; gap: 28px; }
+      .polaroid:first-child,
+      .polaroid:last-child  { transform: rotate(0deg) translateY(0); margin: 0; }
+      .polaroid:hover       { transform: translateY(-8px) scale(1.03) !important; }
+      .music-player         { bottom: 18px; right: 16px; }
+      .music-btn            { width: 46px; height: 46px; font-size: 1.15rem; }
+      .music-info           { max-width: 160px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================
+  <!-- =============================================
        FLOATING BACKGROUND EMOJIS
-  ============================================ -->
+  ============================================== -->
   <div class="floaters" id="floaters" aria-hidden="true"></div>
 
-  <!-- Subtle grain texture -->
+  <!-- Subtle paper grain -->
   <div class="grain-overlay" aria-hidden="true"></div>
 
-  <!-- ============================================
+  <!-- =============================================
+       BACKGROUND AUDIO
+       Put music.mp3 in the same folder as index.html
+  ============================================== -->
+  <audio id="bg-music" loop preload="metadata">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- =============================================
+       FLOATING MUSIC PLAYER
+  ============================================== -->
+  <div class="music-player" role="region" aria-label="Music player">
+
+    <div class="music-info" id="music-info" aria-live="polite">
+      <div class="eq-bars paused" id="eq-bars">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <span class="music-song-name" id="song-name">♪ playing for you</span>
+    </div>
+
+    <div class="volume-row" aria-label="Volume control">
+      <span class="vol-icon">🔈</span>
+      <input class="volume-slider" id="volume-slider"
+             type="range" min="0" max="1" step="0.02" value="0.7"
+             aria-label="Volume" style="--vol: 70%;" />
+      <span class="vol-icon">🔊</span>
+    </div>
+
+    <button class="music-btn" id="music-btn" aria-label="Play background music" title="Play music">
+      ▶
+    </button>
+
+  </div>
+
+  <!-- =============================================
        MAIN CARD
-  ============================================ -->
+  ============================================== -->
   <main class="card-wrapper">
 
-    <!-- TOP RULE -->
+    <!-- Top decorative rule -->
     <div class="top-rule" aria-hidden="true">
       <span></span>
       <span class="crown">✦</span>
@@ -728,73 +734,63 @@
         <em>Happy</em> Birthday,<br>
         <span class="name-accent">Chathumi</span>
       </h1>
-      <div class="age-badge">Twenty — Four ✦ 2026</div>
+      <div class="age-badge">Twenty — Four &nbsp;✦&nbsp; 2026</div>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <span class="icon">🌸</span>
-    </div>
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true"><span class="icon">🌸</span></div>
 
     <!-- PHOTO GALLERY -->
     <section class="gallery-section" aria-label="Photo gallery">
       <p class="gallery-label">✦ &nbsp; Moments of you &nbsp; ✦</p>
       <div class="gallery-grid">
 
-        <!-- Polaroid 1 -->
         <div class="polaroid">
           <img src="image1.jpg" alt="A beautiful memory of Chathumi" loading="lazy"
-               onerror="this.style.background='linear-gradient(135deg,#f5d5d0,#e8bfa5)';this.alt='';this.style.display='block';" />
+               onerror="this.style.background='linear-gradient(135deg,#f5d5d0,#e8bfa5)';this.style.display='block';" />
           <span class="caption">always radiant ✨</span>
         </div>
 
-        <!-- Polaroid 2 -->
         <div class="polaroid">
           <img src="image2.jpg" alt="Another beautiful memory of Chathumi" loading="lazy"
-               onerror="this.style.background='linear-gradient(135deg,#a8cece,#6ba4a4)';this.alt='';this.style.display='block';" />
+               onerror="this.style.background='linear-gradient(135deg,#a8cece,#6ba4a4)';this.style.display='block';" />
           <span class="caption">my favourite person 🌸</span>
         </div>
 
       </div>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <span class="icon">💌</span>
-    </div>
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true"><span class="icon">💌</span></div>
 
-    <!-- LETTER / TYPEWRITER SECTION -->
+    <!-- LETTER / TYPEWRITER -->
     <section class="letter-section" aria-label="Birthday letter">
       <div class="letter-card">
         <p class="letter-header">To my favourite person,</p>
         <div id="typewriter-text" aria-live="polite"></div><span class="cursor" id="cursor" aria-hidden="true"></span>
         <div class="letter-footer" id="letter-footer" style="opacity:0; transition: opacity 0.8s ease;">
-          Forever yours, &nbsp; <strong>Dulina</strong> 🌹
+          Forever yours, &nbsp;<strong>Dulina</strong> 🌹
         </div>
       </div>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <span class="icon">💗</span>
-    </div>
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true"><span class="icon">💗</span></div>
 
-    <!-- EASTER EGG SECTION -->
+    <!-- EASTER EGG -->
     <section class="easter-section" aria-label="Interactive surprise">
       <p class="easter-label">✦ &nbsp; A little secret for you &nbsp; ✦</p>
       <div class="heart-icon" id="heart-icon" aria-label="Heart" role="img">💗</div>
       <button class="easter-btn" id="easter-btn" aria-label="Listen to my heart">
-        <span class="stethoscope">🤍</span>
+        <span>🤍</span>
         Listen to my heart
       </button>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <span class="icon">✨</span>
-    </div>
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true"><span class="icon">✨</span></div>
 
-    <!-- BIRTHDAY WISHES GRID -->
+    <!-- WISHES GRID -->
     <section class="wishes-section" aria-label="Birthday wishes">
       <div class="wishes-grid">
 
@@ -806,7 +802,7 @@
 
         <div class="wish-card">
           <div class="w-icon">💌</div>
-          <div class="w-title">Known & Loved</div>
+          <div class="w-title">Known &amp; Loved</div>
           <p class="w-text">You deserve someone who notices the little things — your laugh, your quiet moods, the way your eyes light up. I notice all of it.</p>
         </div>
 
@@ -832,15 +828,16 @@
       <p class="from-line">With all my love &nbsp;·&nbsp; Dulina &nbsp;·&nbsp; 2026</p>
     </footer>
 
-  </main><!-- /card-wrapper -->
+  </main>
 
-  <!-- ============================================
+  <!-- =============================================
        JAVASCRIPT
-  ============================================ -->
+  ============================================== -->
   <script>
-    /* ============================================================
+
+    /* ─────────────────────────────────────────────
        1. FLOATING BACKGROUND EMOJIS
-    ============================================================ */
+    ───────────────────────────────────────────── */
     (function createFloaters() {
       const container = document.getElementById('floaters');
       const symbols   = ['🌸', '✨', '🌼', '💛', '✦', '🌷', '💗', '⭐', '🌿', '🫧'];
@@ -849,20 +846,19 @@
       for (let i = 0; i < count; i++) {
         const el = document.createElement('span');
         el.classList.add('floater');
-        el.textContent      = symbols[Math.floor(Math.random() * symbols.length)];
-        el.style.left       = `${Math.random() * 100}%`;
-        el.style.fontSize   = `${0.9 + Math.random() * 1.0}rem`;
-        el.style.animationDuration  = `${12 + Math.random() * 18}s`;
-        el.style.animationDelay     = `${-Math.random() * 20}s`;          // stagger so they're already mid-flight on load
-        el.style.opacity    = '0';
+        el.textContent             = symbols[Math.floor(Math.random() * symbols.length)];
+        el.style.left              = `${Math.random() * 100}%`;
+        el.style.fontSize          = `${0.9 + Math.random() * 1.0}rem`;
+        el.style.animationDuration = `${12 + Math.random() * 18}s`;
+        el.style.animationDelay   = `${-Math.random() * 20}s`;
         container.appendChild(el);
       }
     })();
 
 
-    /* ============================================================
-       2. TYPEWRITER EFFECT
-    ============================================================ */
+    /* ─────────────────────────────────────────────
+       2. TYPEWRITER LETTER
+    ───────────────────────────────────────────── */
     const letter = `Tomorrow, you turn 24. And somehow, that number feels too small for the amount of life, warmth, chaos, laughter, memories, and meaning you carry inside you.
 
 People say time passes quickly, but with you, I feel time differently. Some moments with you feel endless — like they deserve to stay forever — while entire weeks without you can feel strangely empty.
@@ -879,20 +875,19 @@ And if one day we look back at this chapter of our lives, I hope we remember it 
 
 Happy Birthday, my love. Thank you for becoming one of my favourite memories while still standing beside me in the present. ❤️`;
 
-    let   charIdx      = 0;
-    const outputEl     = document.getElementById('typewriter-text');
-    const cursorEl     = document.getElementById('cursor');
-    const footerEl     = document.getElementById('letter-footer');
-    const CHAR_SPEED   = 28;   // ms per character (lower = faster)
-    const START_DELAY  = 1800; // ms before typing begins
+    const outputEl   = document.getElementById('typewriter-text');
+    const cursorEl   = document.getElementById('cursor');
+    const footerEl   = document.getElementById('letter-footer');
+    const CHAR_SPEED = 28;    // ms per character
+    const START_DELAY = 1800; // ms before typing starts
+    let charIdx = 0;
 
     function typeNextChar() {
       if (charIdx < letter.length) {
         outputEl.textContent += letter[charIdx];
         charIdx++;
-        setTimeout(typeNextChar, CHAR_SPEED + Math.random() * 14); // slight human jitter
+        setTimeout(typeNextChar, CHAR_SPEED + Math.random() * 14);
       } else {
-        // Typing finished
         cursorEl.style.display = 'none';
         footerEl.style.opacity = '1';
       }
@@ -901,106 +896,86 @@ Happy Birthday, my love. Thank you for becoming one of my favourite memories whi
     setTimeout(typeNextChar, START_DELAY);
 
 
-    /* ============================================================
-       3. MEDICAL EASTER EGG — HEARTBEAT + HEADING SWAP
-    ============================================================ */
-    const easterBtn  = document.getElementById('easter-btn');
-    const heartIcon  = document.getElementById('heart-icon');
-    const mainHeading = document.getElementById('main-heading');
-
-    // Store original heading HTML so we can restore it
-    const originalHeadingHTML = mainHeading.innerHTML;
-
-    // Sweet message to swap in
-    const secretMessage = `<em>You are</em> my<br><span class="name-accent">Everything</span>`;
-
-    let easterActive = false;
-    let easterTimeout;
+    /* ─────────────────────────────────────────────
+       3. EASTER EGG — HEARTBEAT + HEADING SWAP
+    ───────────────────────────────────────────── */
+    const easterBtn        = document.getElementById('easter-btn');
+    const heartIcon        = document.getElementById('heart-icon');
+    const mainHeading      = document.getElementById('main-heading');
+    const originalHeading  = mainHeading.innerHTML;
+    const secretMessage    = `<em>You are</em> my<br><span class="name-accent">Everything</span>`;
+    let   easterActive     = false;
 
     easterBtn.addEventListener('click', function () {
-      if (easterActive) return;   // prevent double-fire
+      if (easterActive) return;
       easterActive = true;
 
-      /* --- Heartbeat on icon --- */
       heartIcon.classList.add('beating');
 
-      /* --- Swap heading with animation --- */
       mainHeading.style.animation = 'none';
-      mainHeading.innerHTML = secretMessage;
+      mainHeading.innerHTML       = secretMessage;
       mainHeading.classList.add('heading-swap');
-      mainHeading.style.color = 'var(--rose-gold)';
+      mainHeading.style.color     = 'var(--rose-gold)';
 
-      /* --- Update button text --- */
       easterBtn.textContent = '💛 I hear it…';
 
-      /* --- Restore after 4.5 seconds --- */
-      easterTimeout = setTimeout(() => {
-        // Restore heading
-        mainHeading.innerHTML = originalHeadingHTML;
+      setTimeout(function () {
+        mainHeading.innerHTML = originalHeading;
         mainHeading.classList.remove('heading-swap');
         mainHeading.style.color = '';
-
-        // Stop heartbeat
         heartIcon.classList.remove('beating');
+        easterBtn.innerHTML = '<span>🤍</span> Listen to my heart';
+        easterActive = false;
+      }, 4500);
+    });
 
-        // Restore button
-        easterBtn.innerHTML = '<span class="stethoscope">🤍</span> Listen to my heart';
 
-    /* ============================================================
-       4. BACKGROUND MUSIC PLAYER
-    ============================================================ */
+    /* ─────────────────────────────────────────────
+       4. MUSIC PLAYER
+    ───────────────────────────────────────────── */
     (function initMusicPlayer() {
-      const audio       = document.getElementById('bg-music');
-      const btn         = document.getElementById('music-btn');
-      const infoPanel   = document.getElementById('music-info');
-      const eqBars      = document.getElementById('eq-bars');
-      const volSlider   = document.getElementById('volume-slider');
+      const audio     = document.getElementById('bg-music');
+      const btn       = document.getElementById('music-btn');
+      const infoPanel = document.getElementById('music-info');
+      const eqBars    = document.getElementById('eq-bars');
+      const volSlider = document.getElementById('volume-slider');
+      let   isPlaying = false;
 
-      let isPlaying = false;
-
-      /* Set initial volume */
       audio.volume = parseFloat(volSlider.value);
 
-      /* ------- Toggle play / pause ------- */
+      /* Play / Pause toggle */
       btn.addEventListener('click', function () {
         if (isPlaying) {
           audio.pause();
-          setUIState(false);
         } else {
-          audio.play().then(() => {
-            setUIState(true);
-          }).catch(() => {
-            /* Autoplay blocked — shouldn't happen on click, but just in case */
+          audio.play().catch(function () {
             btn.title = 'Click to play music';
           });
         }
       });
 
-      /* ------- Volume slider ------- */
+      /* Volume control */
       volSlider.addEventListener('input', function () {
         const val = parseFloat(this.value);
         audio.volume = val;
-        /* Update the CSS gradient fill on the track */
         this.style.setProperty('--vol', `${Math.round(val * 100)}%`);
       });
 
-      /* ------- Sync if audio ends (shouldn't with loop, but safety net) ------- */
-      audio.addEventListener('ended', () => setUIState(false));
-      audio.addEventListener('pause', () => { if (!audio.ended) setUIState(false); });
-      audio.addEventListener('play',  () => setUIState(true));
+      /* Sync UI to audio events */
+      audio.addEventListener('play', function ()  { setUIState(true);  });
+      audio.addEventListener('pause', function () { setUIState(false); });
+      audio.addEventListener('ended', function () { setUIState(false); });
 
-      /* ------- Update all UI elements ------- */
       function setUIState(playing) {
         isPlaying = playing;
-
         if (playing) {
-          btn.textContent   = '⏸';
+          btn.textContent = '⏸';
           btn.setAttribute('aria-label', 'Pause music');
           btn.classList.add('playing');
           infoPanel.classList.add('visible');
           eqBars.classList.remove('paused');
         } else {
-          btn.textContent   = '▶';
+          btn.textContent = '▶';
           btn.setAttribute('aria-label', 'Play music');
           btn.classList.remove('playing');
           infoPanel.classList.remove('visible');
@@ -1008,59 +983,15 @@ Happy Birthday, my love. Thank you for becoming one of my favourite memories whi
         }
       }
 
-      /* ------- Try to extract filename as song name ------- */
-      const src = audio.querySelector('source')?.src || '';
-      if (src) {
-        const raw = src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+      /* Show filename as song name */
+      const srcEl = audio.querySelector('source');
+      if (srcEl && srcEl.src) {
+        const raw       = srcEl.src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
         const formatted = raw.charAt(0).toUpperCase() + raw.slice(1);
         document.getElementById('song-name').textContent = '♪ ' + formatted;
       }
     })();
+
   </script>
-
-  <!-- ============================================
-       BACKGROUND MUSIC
-       Place your song file named "music.mp3" in the same folder.
-       Supported formats: .mp3  |  .ogg  |  .wav
-  ============================================ -->
-  <audio id="bg-music" loop preload="metadata">
-    <source src="music.mp3" type="audio/mpeg" />
-    <!-- Fallback formats (optional) -->
-    <!-- <source src="music.ogg" type="audio/ogg" /> -->
-  </audio>
-
-  <!-- FLOATING MUSIC PLAYER UI -->
-  <div class="music-player" role="region" aria-label="Music player">
-
-    <!-- Song name + EQ bars -->
-    <div class="music-info" id="music-info" aria-live="polite">
-      <div class="eq-bars paused" id="eq-bars">
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <span class="music-song-name" id="song-name">♪ playing for you</span>
-    </div>
-
-    <!-- Volume row (visible on hover) -->
-    <div class="volume-row" aria-label="Volume control">
-      <span class="vol-icon">🔈</span>
-      <input
-        class="volume-slider"
-        id="volume-slider"
-        type="range"
-        min="0" max="1" step="0.02"
-        value="0.7"
-        aria-label="Volume"
-        style="--vol: 70%;"
-      />
-      <span class="vol-icon">🔊</span>
-    </div>
-
-    <!-- Play / Pause button -->
-    <button class="music-btn" id="music-btn" aria-label="Play background music" title="Play music">
-      ▶
-    </button>
-
-  </div>
-
 </body>
 </html>
